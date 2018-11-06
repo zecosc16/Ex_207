@@ -16,6 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BL extends AbstractTableModel{
 
+    private boolean showSea=true;
     private ArrayList<WeatherStation> w = new ArrayList<>();
     private String[] colNames = {"Place","Sea Level","Tempretur","rel. Humidity"};
     @Override
@@ -31,7 +32,9 @@ public class BL extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
+        if(showSea)
         return 4;
+        return 3;
     }
 
     @Override
@@ -41,7 +44,12 @@ public class BL extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
+        if(showSea)
         return colNames[column];
+        if(column>=1)
+            return colNames[++column];
+        return colNames[column];
+         
     }
 
     
@@ -53,18 +61,21 @@ public class BL extends AbstractTableModel{
    }
    
    public void setTemp(int row,double temp) throws Exception{
-       if(temp<-80||temp>50)
-           throw new Exception("no possible Temp");
        w.get(row).setTemp(temp);
        fireTableDataChanged();
    }
    
    public void setHumidity(int row, int hum) throws Exception{
-       if(hum<0||hum>100)
-           throw new Exception("no possible Humidity");
        w.get(row).setRelHumidity(hum);
        fireTableDataChanged();
    }
+
+    public void setShowSea() {
+        this.showSea = !showSea;
+        fireTableStructureChanged();
+    }
+   
+   
     
     
     
