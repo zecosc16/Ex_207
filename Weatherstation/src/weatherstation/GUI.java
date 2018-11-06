@@ -5,6 +5,10 @@
  */
 package weatherstation;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author oskar
@@ -86,6 +90,11 @@ public class GUI extends javax.swing.JFrame {
         jMenu2.add(btSetTemp);
 
         btSetHumidity.setText("Set  Humiidity");
+        btSetHumidity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSetHumidityActionPerformed(evt);
+            }
+        });
         jMenu2.add(btSetHumidity);
 
         jMenuBar1.add(jMenu2);
@@ -108,8 +117,20 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btRemoveWetherStActionPerformed
 
     private void btSetTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetTempActionPerformed
-        // TODO add your handling code here:
+        try {
+            bl.setTemp(tableWeather.getSelectedRow(),Double.parseDouble(JOptionPane.showInputDialog(null,"Please enter a Tempreture")));
+        } catch (Exception ex) {
+    System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btSetTempActionPerformed
+
+    private void btSetHumidityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetHumidityActionPerformed
+        try {
+            bl.setHumidity(tableWeather.getSelectedRow(),Integer.parseInt(JOptionPane.showInputDialog(null,"Please enter the Humidity")));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btSetHumidityActionPerformed
 
     /**
      * @param args the command line arguments

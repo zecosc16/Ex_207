@@ -45,11 +45,15 @@ public class WeatherStation implements Comparable<WeatherStation>{
         this.seaLevel = seaLevel;
     }
 
-    public void setRelHumidity(int relHumidity) {
+    public void setRelHumidity(int hum) throws Exception {
+        if(hum<0||hum>100)
+           throw new Exception("no possible Humidity");
         this.relHumidity = relHumidity;
     }
 
-    public void setTemp(double temp) {
+    public void setTemp(double temp) throws Exception {
+               if(temp<-80||temp>50)
+           throw new Exception("no possible Temp");
         this.temp = temp;
     }
 
