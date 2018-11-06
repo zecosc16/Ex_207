@@ -6,6 +6,8 @@
 package weatherstation;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -20,6 +22,12 @@ public class BL extends AbstractTableModel{
     public int getRowCount() {
         return w.size();
     }
+    
+    public void add(WeatherStation w){
+        this.w.add(w);
+        Collections.sort(this.w);
+        fireTableDataChanged();
+    }
 
     @Override
     public int getColumnCount() {
@@ -28,7 +36,7 @@ public class BL extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return w.get(rowIndex);
     }
 
     @Override

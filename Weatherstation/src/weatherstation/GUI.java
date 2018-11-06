@@ -11,11 +11,12 @@ package weatherstation;
  */
 public class GUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI
-     */
+    private BL bl = new BL();
     public GUI() {
         initComponents();
+        
+        tableWeather.setModel(bl);
+        
     }
 
     /**
@@ -31,7 +32,11 @@ public class GUI extends javax.swing.JFrame {
         tableWeather = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        btAddWeatherSt = new javax.swing.JMenuItem();
+        btRemoveWetherSt = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,16 +55,43 @@ public class GUI extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Stations");
+
+        btAddWeatherSt.setText("Add Weather Station");
+        btAddWeatherSt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddWeatherStActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btAddWeatherSt);
+
+        btRemoveWetherSt.setText("remove Weather Station");
+        jMenu1.add(btRemoveWetherSt);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Values");
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("jMenuItem4");
+        jMenu2.add(jMenuItem4);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btAddWeatherStActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddWeatherStActionPerformed
+        DialogWetterStation d = new DialogWetterStation(this, true);
+        d.setVisible(true);
+        if(d.isOk()){
+            bl.add(d.getW());
+        }
+    }//GEN-LAST:event_btAddWeatherStActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,9 +129,13 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btAddWeatherSt;
+    private javax.swing.JMenuItem btRemoveWetherSt;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableWeather;
     // End of variables declaration//GEN-END:variables
