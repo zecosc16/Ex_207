@@ -44,7 +44,27 @@ public class BL extends AbstractTableModel{
         return colNames[column];
     }
 
+    
+   public void remove(int[] rows){
+       for (int i=rows.length-1;i>-1;i--) {
+           w.remove(i);
+       }
+       fireTableDataChanged();
+   }
    
+   public void setTemp(int row,double temp) throws Exception{
+       if(temp<-80||temp>50)
+           throw new Exception("no possible Temp");
+       w.get(row).setTemp(temp);
+       fireTableDataChanged();
+   }
+   
+   public void setHumidity(int row, int hum) throws Exception{
+       if(hum<0||hum>100)
+           throw new Exception("no possible Humidity");
+       w.get(row).setRelHumidity(hum);
+       fireTableDataChanged();
+   }
     
     
     

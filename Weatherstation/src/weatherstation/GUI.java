@@ -35,8 +35,8 @@ public class GUI extends javax.swing.JFrame {
         btAddWeatherSt = new javax.swing.JMenuItem();
         btRemoveWetherSt = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        btSetTemp = new javax.swing.JMenuItem();
+        btSetHumidity = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,17 +66,27 @@ public class GUI extends javax.swing.JFrame {
         jMenu1.add(btAddWeatherSt);
 
         btRemoveWetherSt.setText("remove Weather Station");
+        btRemoveWetherSt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRemoveWetherStActionPerformed(evt);
+            }
+        });
         jMenu1.add(btRemoveWetherSt);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Values");
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu2.add(jMenuItem3);
+        btSetTemp.setText("Set Tempreture");
+        btSetTemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSetTempActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btSetTemp);
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu2.add(jMenuItem4);
+        btSetHumidity.setText("Set  Humiidity");
+        jMenu2.add(btSetHumidity);
 
         jMenuBar1.add(jMenu2);
 
@@ -92,6 +102,14 @@ public class GUI extends javax.swing.JFrame {
             bl.add(d.getW());
         }
     }//GEN-LAST:event_btAddWeatherStActionPerformed
+
+    private void btRemoveWetherStActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoveWetherStActionPerformed
+        bl.remove(tableWeather.getSelectedRows());
+    }//GEN-LAST:event_btRemoveWetherStActionPerformed
+
+    private void btSetTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetTempActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btSetTempActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,11 +149,11 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btAddWeatherSt;
     private javax.swing.JMenuItem btRemoveWetherSt;
+    private javax.swing.JMenuItem btSetHumidity;
+    private javax.swing.JMenuItem btSetTemp;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableWeather;
     // End of variables declaration//GEN-END:variables
