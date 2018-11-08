@@ -5,6 +5,9 @@
  */
 package weatherstation;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author oskar
@@ -142,9 +145,13 @@ public class DialogWetterStation extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
-        w= new WeatherStation(tfPlace.getText(), Integer.parseInt(tfSeaLevel.getText()), Integer.parseInt(tfHumidity.getText()) ,Double.parseDouble(tfTempreture.getText()) );
-        ok=true;
-        this.dispose();
+        try {
+            w= new WeatherStation(tfPlace.getText(), Integer.parseInt(tfSeaLevel.getText()), Integer.parseInt(tfHumidity.getText()) ,Double.parseDouble(tfTempreture.getText()) );
+            ok=true;
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(DialogWetterStation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btOKActionPerformed
 
     private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed

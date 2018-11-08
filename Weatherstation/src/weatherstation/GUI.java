@@ -5,8 +5,11 @@
  */
 package weatherstation;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +23,23 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
         
         tableWeather.setModel(bl);
+        try {
+            bl.read(this.getFile());
+        } catch (Exception ex) {
+
+        }
         
+        
+        
+    }
+    
+    public File getFile() throws Exception{
+        JFileChooser jf = new JFileChooser();
+        if(jf.showOpenDialog(this )==JFileChooser.APPROVE_OPTION){
+           return jf.getSelectedFile();
+        }
+         throw new Exception("something went wrong");   
+            
     }
 
     /**
@@ -43,6 +62,11 @@ public class GUI extends javax.swing.JFrame {
         btSetHumidity = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         tableWeather.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,6 +155,15 @@ public class GUI extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btSetHumidityActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            bl.write(this.getFile());
+        } catch (IOException ex) {
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

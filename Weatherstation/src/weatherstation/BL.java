@@ -5,8 +5,15 @@
  */
 package weatherstation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,7 +21,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author oskar
  */
-public class BL extends AbstractTableModel{
+public class BL extends AbstractTableModel implements Serializable{
 
     private ArrayList<WeatherStation> w = new ArrayList<>();
     private String[] colNames = {"Place","Sea Level","Tempretur","rel. Humidity"};
@@ -64,6 +71,27 @@ public class BL extends AbstractTableModel{
            throw new Exception("no possible Humidity");
        w.get(row).setRelHumidity(hum);
        fireTableDataChanged();
+   }
+   
+   public void read(File f) throws FileNotFoundException, IOException, ClassNotFoundException{
+       ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+       Object o;
+       while((o=ois.readObject())!=null){
+           if(o instanceof WeatherStation)
+               w.add((WeatherStation) o);
+       }
+       ois.close();
+       fireTableDataChanged();
+   }
+   
+   public void write(File f) throws FileNotFoundException, IOException{
+   ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+       for (WeatherStation weatherStation : w) {
+           oos.writeObject(oos);
+       }
+       
+       oos.flush();
+       oos.close();
    }
     
     

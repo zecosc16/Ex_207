@@ -5,20 +5,22 @@
  */
 package weatherstation;
 
+import java.io.Serializable;
+
 /**
  *
  * @author oskar
  */
-public class WeatherStation implements Comparable<WeatherStation>{
+public class WeatherStation implements Serializable, Comparable<WeatherStation> {
     private String place;
     private int seaLevel,relHumidity;
     private double temp;
 
-    public WeatherStation(String place, int seaLevel, int relHumidity, double temp) {
+    public WeatherStation(String place, int seaLevel, int relHumidity, double temp) throws Exception {
         this.place = place;
         this.seaLevel = seaLevel;
-        this.relHumidity = relHumidity;
-        this.temp = temp;
+        this.setRelHumidity(relHumidity);
+        this.setTemp(temp);
     }
 
     public String getPlace() {
