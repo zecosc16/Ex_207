@@ -19,15 +19,20 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
 
     private BL bl = new BL();
+    private CellRenderer cellR = new CellRenderer();
     public GUI() {
         initComponents();
         
         tableWeather.setModel(bl);
+
         try {
             bl.read(this.getFile());
         } catch (Exception ex) {
 
         }
+
+        tableWeather.setDefaultRenderer(Object.class,cellR);
+
         
         
         
@@ -51,6 +56,8 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        btShowOrHide = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableWeather = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -60,6 +67,14 @@ public class GUI extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         btSetTemp = new javax.swing.JMenuItem();
         btSetHumidity = new javax.swing.JMenuItem();
+
+        btShowOrHide.setText("Show or Hide Col sea Level");
+        btShowOrHide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btShowOrHideActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(btShowOrHide);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -79,6 +94,7 @@ public class GUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableWeather.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(tableWeather);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -156,6 +172,7 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btSetHumidityActionPerformed
 
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try {
             bl.write(this.getFile());
@@ -164,6 +181,12 @@ public class GUI extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void btShowOrHideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btShowOrHideActionPerformed
+        bl.setShowSea();
+        cellR.setCol();
+    }//GEN-LAST:event_btShowOrHideActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -205,9 +228,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem btRemoveWetherSt;
     private javax.swing.JMenuItem btSetHumidity;
     private javax.swing.JMenuItem btSetTemp;
+    private javax.swing.JMenuItem btShowOrHide;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableWeather;
     // End of variables declaration//GEN-END:variables
